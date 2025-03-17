@@ -38,12 +38,12 @@ const Input = ({
     <div>
       <label
         htmlFor={id}
-        className="flex items-center gap-1.5 text-sm font-medium mb-2 text-gray-200"
+        className="flex items-center gap-1.5 text-sm font-medium mb-2 text-gray-800"
       >
         {icon && icon}
         {label}{" "}
         {counter && maxLength && (
-          <span className="text-gray-400 text-xs">
+          <span className="text-gray-500 text-xs">
             ({value.length}/{maxLength})
           </span>
         )}
@@ -56,7 +56,7 @@ const Input = ({
         onChange={onChange}
         onBlur={onBlur}
         className={cn(
-          "w-full p-3 bg-gray-200 rounded-lg transition-all",
+          "w-full p-3 border bg-white rounded-lg transition-all",
           isTextarea && "min-h-24 resize-y"
         )}
         placeholder={placeholder}

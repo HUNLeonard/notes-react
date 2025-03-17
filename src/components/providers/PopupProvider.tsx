@@ -7,23 +7,47 @@ interface PopupProviderContext {
   isPopupOpen: boolean,
   openPopup: () => void;
   closePopup: () => void;
-  editNote: TNote | null
+  isClosing: boolean;
+  editNote: TNote | null;
   setEditNote: (arg: TNote | null) => void;
+  isCreateMode: boolean;
+  setCreateMode: (arg: boolean) => void;
 }
 
 const PopupProvider = ({ children }: { children: React.ReactNode }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [editNote, setEditNote] = useState<TNote | null>(null)
+  const [isClosing, setIsClosing] = useState(false);
+  const [editNote, setEditNote] = useState<TNote | null>(null);
+  const [isCreateMode, setCreateMode] = useState(false);
+
+  const delayClosingTimer = 400; // ms
 
   const openPopup = () => {
-    setIsPopupOpen(true)
+    setIsPopupOpen(true);
+    setIsClosing(false);
   }
+
   const closePopup = () => {
-    setIsPopupOpen(false)
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsPopupOpen(false);
+      setIsClosing(false);
+      setCreateMode(false);
+      setEditNote(null);
+    }, delayClosingTimer)
   }
 
   return (
-    <PopupProviderContext.Provider value={{ isPopupOpen, closePopup, openPopup, editNote, setEditNote }}>
+    <PopupProviderContext.Provider value={{
+      isPopupOpen,
+      isClosing,
+      closePopup,
+      openPopup,
+      editNote,
+      setEditNote,
+      isCreateMode,
+      setCreateMode
+    }}>
       {children}
     </PopupProviderContext.Provider>
   )

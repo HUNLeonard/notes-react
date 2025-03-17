@@ -6,7 +6,7 @@ const NoteListManager = () => {
   const notes = useNoteStore(store => store.notes)
 
   return (
-    <section className='py-6 px-4'>
+    <section className='px-4'>
       {notes.length > 0 ? (
         <NoteListContent notes={notes} />
       ) : (

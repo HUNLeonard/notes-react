@@ -10,7 +10,7 @@ interface ColorPickerProps {
 const ColorPicker = ({ selectedColor, colorOptions, onColorSelect }: ColorPickerProps) => {
   return (
     <div>
-      <label className="flex items-center gap-1.5 text-sm font-medium mb-2 text-gray-200">
+      <label className="flex items-center gap-1.5 text-sm font-medium mb-2 text-gray-800">
         <Palette size={16} />
         Background Color
       </label>

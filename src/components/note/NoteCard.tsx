@@ -1,6 +1,6 @@
 import { TNote } from '../../types/Note'
 import { usePopup } from '../../hooks/usePopup';
-import { MessageSquareQuote } from 'lucide-react';
+// import { MessageSquareQuote } from 'lucide-react';
 import cn from '../../utils/cn';
 
 interface NoteCardProps {
@@ -19,13 +19,12 @@ const NoteCard = ({ note }: NoteCardProps) => {
     <article
       onClick={handleClick}
       className={cn('p-4 rounded-lg shadow-lg cursor-pointer hover:-translate-y-1 hover:shadow-xl',
-        ' [transition:all_0.2s] flex-1 max-w-78 min-w-30 relative overflow-hidden',
-        'animation-popin')}
+        ' [transition:all_0.2s] relative overflow-hidden animation-popin')} // For some reason the regular transition-all tailwind DID NOT work when I tried
       style={{ background: note.bgColor }}
     >
       <div className="flex items-start">
-        <MessageSquareQuote className="h-5 w-5 opacity-60 mt-1 mr-1.5 flex-shrink-0" />
-        <p className="text-lg font-medium leading-tight break-all">{note.title}</p>
+        {/* <MessageSquareQuote className="h-5 w-5 opacity-60 mt-1 mr-1.5 flex-shrink-0" /> */}
+        <p className="text-lg font-medium leading-tight [word-break:break-word;] text-white">„{note.title}”</p>
       </div>
 
       <div className="absolute -bottom-6 -right-6 h-16 w-16 rounded-full bg-black/5"></div>
