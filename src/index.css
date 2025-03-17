@@ -14,3 +14,35 @@
 
   --container-8xl: 90rem;
 }
+
+.animation-slideUp{
+  animation: slideUp forwards ease-in-out;
+}
+
+
+@keyframes slideUp {
+  0%{
+    opacity: 0;
+    translate: 300px 0;
+    rotate: 20deg
+  }
+  100%{
+    opacity: 100;
+    translate: 0 0
+  }
+}
+
+.animation-disapear{
+  animation: disapear forwards ease-in-out;
+}
+
+@keyframes disapear {
+  0%{
+    opacity: 100;
+  }
+  100%{
+    translate: -300px 0;
+    rotate: -20deg;
+    opacity: 0;
+  }
+}
