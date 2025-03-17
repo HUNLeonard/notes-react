@@ -86,7 +86,7 @@ const NewNoteForm = () => {
       <form
         onSubmit={handleSubmit}
         className={cn("space-y-5 overflow-hidden transition-all duration-700",
-          isExpanded ? "max-h-80 mt-4" : "max-h-0")}
+          isExpanded ? "max-h-92 mt-4" : "max-h-0")}
       >
         <Input
           id="title"
