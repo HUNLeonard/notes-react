@@ -1,5 +1,6 @@
 import { TNote } from '../../types/Note'
 import { usePopup } from '../../hooks/usePopup';
+import { MessageSquareQuote } from 'lucide-react';
 
 interface NoteCardProps {
   note: TNote;
@@ -16,9 +17,16 @@ const NoteCard = ({ note }: NoteCardProps) => {
   return (
     <article
       onClick={handleClick}
-      className='p-4 rounded-lg shadow-md cursor-pointer hover:-translate-y-0.5 transition-transform duration-200 flex-1 max-w-78 min-w-30 break-words'
-      style={{ background: note.bgColor }}>
-      „{note.title}”
+      className='p-4 rounded-lg shadow-lg cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex-1 max-w-78 min-w-30 break-words relative overflow-hidden'
+      style={{ background: note.bgColor }}
+    >
+      <div className="flex items-start">
+        <MessageSquareQuote className="h-5 w-5 opacity-60 mt-1 mr-1.5 flex-shrink-0" />
+        <p className="text-lg font-medium leading-tight break-all">{note.title}</p>
+      </div>
+
+      <div className="absolute -bottom-6 -right-6 h-16 w-16 rounded-full bg-black/5"></div>
+      <div className="absolute -top-6 -left-6 h-16 w-16 rounded-full bg-white/10"></div>
     </article>
   )
 }

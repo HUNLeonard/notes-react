@@ -6,6 +6,10 @@ export const colorOptions = [
   "rgb(255,255,0)", // yellow
   "rgb(0,187,119)", // green
   "rgb(251,133,0)", // orange
+  "rgb(186,85,211)", // purple
+  "rgb(64,224,208)", // turquoise
+  "rgb(255,99,71)", // red-orange
+  "rgb(135,206,250)", // light sky blue
 ];
 
-export const MAX_TITLE_LENGTH = 100;
+export const MAX_TITLE_LENGTH = 200;
