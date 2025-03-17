@@ -13,14 +13,23 @@ const NewNoteForm = () => {
   const addNote = useNoteStore((store) => store.addNote);
   const [newNoteData, setNewNoteData] = useState({ ...defaultNoteValue });
   const [isExpanded, setIsExpanded] = useState(false);
+  const [titleTouched, setTitleTouched] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newNoteData.title.trim()) {
       addNote(newNoteData.title, newNoteData.bgColor);
-      setNewNoteData({ ...defaultNoteValue });
-      setIsExpanded(false);
+      reset();
     }
+  };
+
+  const reset = () => {
+    setNewNoteData({ ...defaultNoteValue });
+    setTitleTouched(false);
+  }
+
+  const handleBlur = () => {
+    setTitleTouched(true);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +74,7 @@ const NewNoteForm = () => {
 
       <form
         onSubmit={handleSubmit}
-        className={`space-y-5  overflow-hidden transition-all duration-400 ${isExpanded ? "max-h-80 mt-4" : "max-h-0"
+        className={`space-y-5  overflow-hidden transition-all duration-700 ${isExpanded ? "max-h-80 mt-4" : "max-h-0"
           }`}
       >
         <div>
@@ -85,12 +94,13 @@ const NewNoteForm = () => {
             name="title"
             value={newNoteData.title}
             onChange={handleChange}
+            onBlur={handleBlur}
             className="w-full p-3 bg-gray-200 rounded-lg transition-all"
             placeholder="Enter notes title..."
             maxLength={MAX_TITLE_LENGTH}
             autoFocus={isExpanded}
           />
-          {newNoteData.title.length === 0 && (
+          {titleTouched && newNoteData.title.length === 0 && (
             <p className="text-red-500 text-sm mt-1 font-bold">
               Note title must contain at least 1 character
             </p>
@@ -142,10 +152,7 @@ const NewNoteForm = () => {
 
           <button
             type="button"
-            onClick={() => {
-              setIsExpanded(false);
-              setNewNoteData({ ...defaultNoteValue });
-            }}
+            onClick={() => { setIsExpanded(false); reset() }}
             className={cn(
               "px-5 py-2.5 bg-gray-200 text-gray-700 rounded-lg font-medium ",
               "hover:bg-gray-300 hover:-translate-y-0.5  transition-all cursor-pointer",

@@ -1,6 +1,7 @@
 import { TNote } from '../../types/Note'
 import { usePopup } from '../../hooks/usePopup';
 import { MessageSquareQuote } from 'lucide-react';
+import cn from '../../utils/cn';
 
 interface NoteCardProps {
   note: TNote;
@@ -17,7 +18,9 @@ const NoteCard = ({ note }: NoteCardProps) => {
   return (
     <article
       onClick={handleClick}
-      className='p-4 rounded-lg shadow-lg cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex-1 max-w-78 min-w-30 break-words relative overflow-hidden'
+      className={cn('p-4 rounded-lg shadow-lg cursor-pointer hover:-translate-y-1 hover:shadow-xl',
+        ' transition-all duration-300 flex-1 max-w-78 min-w-30 break-words relative overflow-hidden',
+        'animation-popin')}
       style={{ background: note.bgColor }}
     >
       <div className="flex items-start">
