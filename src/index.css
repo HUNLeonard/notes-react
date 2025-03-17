@@ -48,13 +48,13 @@
 }
 
 .animation-popin{
-  animation: popin 1s forwards ease-in-out;
+  animation: popin 0.7s forwards ease-in-out;
 }
 
 @keyframes popin {
   0%{
     opacity: 0;
-    translate: 0px 100%;
+    transform: translateY(100%);
   }
   100%{
     

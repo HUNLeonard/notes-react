@@ -19,7 +19,7 @@ const NoteCard = ({ note }: NoteCardProps) => {
     <article
       onClick={handleClick}
       className={cn('p-4 rounded-lg shadow-lg cursor-pointer hover:-translate-y-1 hover:shadow-xl',
-        ' transition-all duration-300 flex-1 max-w-78 min-w-30 break-words relative overflow-hidden',
+        ' [transition:all_0.2s] flex-1 max-w-78 min-w-30 relative overflow-hidden',
         'animation-popin')}
       style={{ background: note.bgColor }}
     >

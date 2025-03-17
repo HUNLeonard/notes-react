@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { usePopup } from "../../hooks/usePopup";
 import { useNoteStore } from "../../store/notes.store";
 import { TNote } from "../../types/Note";
-import { Type, Palette, Save, Trash2 } from "lucide-react";
+import { Type, Save, Trash2 } from "lucide-react";
 import { colorOptions, MAX_TITLE_LENGTH } from "../../lib/conts";
 import cn from "../../utils/cn";
+import Input from "./Input";
+import ColorPicker from "./ColorPicker";
 
 const delayClosingTimer = 400; //ms
 
@@ -75,6 +77,17 @@ const Popup = () => {
     }
   };
 
+  // title error
+  const getTitleError = () => {
+    if (!noteData?.title.trim()) {
+      return "Title cannot be empty";
+    }
+    if (noteData.title.length > MAX_TITLE_LENGTH) {
+      return `Title exceeds maximum length of ${MAX_TITLE_LENGTH} characters`;
+    }
+    return "";
+  };
+
   if (!noteData || !isPopupOpen) return null;
 
   return (
@@ -98,46 +111,26 @@ const Popup = () => {
         </h2>
 
         <div className="mb-5">
-          <label className="flex items-center gap-1.5 text-sm font-medium mb-2 text-gray-200">
-            <Type size={16} />
-            Title <span className="text-gray-400 text-xs ml-1">({noteData.title.length}/{MAX_TITLE_LENGTH})</span>
-          </label>
-          <textarea
+          <Input
+            id="edit-title"
             name="title"
+            label="Title"
             value={noteData.title}
             onChange={handleChange}
-            className="w-full p-3 rounded-lg transition-all min-h-24 resize-y bg-gray-200"
+            icon={<Type size={16} />}
             maxLength={MAX_TITLE_LENGTH}
+            error={getTitleError()}
+            counter={true}
+            isTextarea={true}
           />
-          {noteData.title.length > MAX_TITLE_LENGTH && (
-            <p className="text-red-500 text-sm mt-1">
-              Title exceeds maximum length of {MAX_TITLE_LENGTH} characters
-            </p>
-          )}
-          {!noteData.title.trim() && (
-            <p className="text-red-500 text-sm mt-1 font-bold">
-              Title cannot be empty
-            </p>
-          )}
         </div>
 
         <div className="mb-6">
-          <label className="flex items-center gap-1.5 text-sm font-medium mb-2 text-gray-200">
-            <Palette size={16} />
-            Background Color
-          </label>
-          <div className="flex flex-wrap gap-3">
-            {colorOptions.map((color, index) => (
-              <div
-                key={index}
-                onClick={() => handleColorSelect(color)}
-                className={`size-10 rounded-full cursor-pointer border hover:scale-110",
-                  " transition-transform ${noteData.bgColor === color ? 'ring-2 ring-blue-500 ring-offset-2' : 'border-gray-300'}`}
-                style={{ backgroundColor: color }}
-                title={color}
-              />
-            ))}
-          </div>
+          <ColorPicker
+            selectedColor={noteData.bgColor}
+            colorOptions={colorOptions}
+            onColorSelect={handleColorSelect}
+          />
         </div>
 
         <div className="flex flex-wrap gap-3">
